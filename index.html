@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Function to handle redirects
+    function redirect() {
+      // Retrieve the current click count from local storage
+      let clickCount = parseInt(localStorage.getItem('clickCount') || '0');
+      clickCount++;
+
+      // Store the updated click count
+      localStorage.setItem('clickCount', clickCount);
+
+      // Redirect based on click count
+      if (clickCount === 1) {
+        window.location.href = 'https://facebook.com'; // Replace with your Adresta link
+      } else if (clickCount === 2) {
+        window.location.href = 'https://youtube.com'; // Replace with your Blogger video link
+      } else {
+        document.body.innerHTML = 'Error: Too many clicks.';
+      }
+    }
+
+    // Call the redirect function when the page loads
+    window.onload = redirect;
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
