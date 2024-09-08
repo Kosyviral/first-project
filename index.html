@@ -4,22 +4,31 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    // Function to handle redirects
     function redirect() {
-      // Retrieve the current click count from local storage
+      // Retrieve the current click count and timestamp from localStorage
       let clickCount = parseInt(localStorage.getItem('clickCount') || '0');
-      clickCount++;
+      let lastClickTime = parseInt(localStorage.getItem('lastClickTime') || '0');
+      let currentTime = new Date().getTime();
 
-      // Store the updated click count
+      // If more than 10 minutes have passed since the last click, reset the click count
+      if (currentTime - lastClickTime > 10 * 60 * 1000) { // 10 minutes in milliseconds
+        clickCount = 0;
+      }
+
+      // Update the last click timestamp
+      localStorage.setItem('lastClickTime', currentTime);
+
+      // Increment click count and update localStorage
+      clickCount++;
       localStorage.setItem('clickCount', clickCount);
 
       // Redirect based on click count
       if (clickCount === 1) {
-        window.location.href = 'https://yahoo.com'; // Replace with your Adresta link
+        window.location.href = 'https://hollymoviehd.com'; // Replace with your Adresta link
       } else if (clickCount === 2) {
         window.location.href = 'https://youtube.com'; // Replace with your Blogger video link
-      } else {
-        document.body.innerHTML = 'Error: Too many clicks.';
+        // Reset click count after redirecting to the full video
+        localStorage.setItem('clickCount', '0');
       }
     }
 
